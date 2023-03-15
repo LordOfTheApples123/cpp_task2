@@ -21,7 +21,7 @@ namespace Task2 {
 
         void setName(const string &name);
 
-        virtual const vector<string> &getFieldVector() const;
+
 
         virtual void setFieldVector() const;
 
@@ -41,6 +41,8 @@ namespace Task2 {
         MyClassForPoly(string name, const vector<string> &funcVector);
 
         virtual ~MyClassForPoly();
+
+        virtual void print();
 
     protected:
         string name;

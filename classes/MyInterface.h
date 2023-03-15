@@ -33,6 +33,8 @@ namespace Task2 {
         ~MyInterface() override;
 
 
+        void print() override;
+
     private:
         vector<MyInterface> extendsVector;
 

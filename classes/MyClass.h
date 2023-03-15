@@ -20,7 +20,9 @@ namespace Task2 {
                 const vector<MyInterface> &implementsVector, const vector<string> &fieldVector);
 
 
-        const vector<string> &getFieldVector() const override;
+        const vector<string> &getFieldVector() const;
+
+
 
 
 
@@ -44,6 +46,8 @@ namespace Task2 {
         bool changeField(string newName, int id) override;
 
         ~MyClass() override;
+
+        void print() override;
 
     protected:
         vector<MyClass> extendsVector;

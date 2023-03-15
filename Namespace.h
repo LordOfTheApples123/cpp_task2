@@ -15,7 +15,7 @@ namespace Task2 {
 
     class Namespace {
     public:
-        Namespace(string name, const vector <MyClassForPoly> &classVector);
+        Namespace(string name, const vector <MyClassForPoly*> &classVector);
 
         explicit Namespace(string name);
 
@@ -27,13 +27,16 @@ namespace Task2 {
 
         Namespace& operator=(const Namespace &rhs);
 
-        MyClassForPoly rmCLass(int id);
-        MyClassForPoly rmClass(MyClassForPoly myClass);
-        void addClass(MyClassForPoly myClass);
+        MyClassForPoly * rmCLass(int id);
+        MyClassForPoly * rmClass(MyClassForPoly* myClass);
+        void addClass(MyClassForPoly* myClass);
+        MyClassForPoly *& get(int id);
+
+        void print();
 
     private:
         string name;
-        vector<MyClassForPoly> classVector;
+        vector<MyClassForPoly*> classVector;
     };
 
 

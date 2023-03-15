@@ -30,10 +30,7 @@ namespace Task2 {
 
     MyClassForPoly::MyClassForPoly(string name, const vector<string> &funcVector) : name(std::move(name)), funcVector(funcVector) {}
 
-    const vector<string> &MyClassForPoly::getFieldVector() const {
-        cout << "no fields";
-        return {};
-    }
+
 
     void MyClassForPoly::setFieldVector() const {
     }
@@ -89,6 +86,10 @@ namespace Task2 {
         name.erase();
         funcVector.clear();
         funcVector.shrink_to_fit();
+    }
+
+    void MyClassForPoly::print() {
+        cout<<"this shouldn't print";
     }
 
 

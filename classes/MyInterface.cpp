@@ -3,6 +3,7 @@
 //
 
 #include <algorithm>
+#include <iostream>
 #include "MyInterface.h"
 using namespace std;
 
@@ -65,6 +66,16 @@ namespace Task2 {
     MyInterface::~MyInterface() {
         extendsVector.clear();
         extendsVector.shrink_to_fit();
+    }
+
+    void MyInterface::print() {
+        int i = 0;
+        cout<<name<<endl;
+        cout<< "   funcs: " << endl;
+        for(auto it = funcVector.begin(); it!=funcVector.end(); ++it, ++i){
+            cout<< "      "<<i<<": ";
+            cout << *it<< endl;
+        }
     }
 
 

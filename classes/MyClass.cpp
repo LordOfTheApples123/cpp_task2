@@ -3,12 +3,13 @@
 //
 
 #include <algorithm>
+#include <iostream>
 #include "MyClass.h"
 
 namespace Task2 {
     MyClass::MyClass(const string &name, const vector<string> &funcVector) : MyClassForPoly(name,
                                                                                             funcVector) {
-        this -> name = "class " + name;
+        this->name = "class " + name;
     }
 
     const vector<string> &MyClass::getFieldVector() const {
@@ -16,7 +17,7 @@ namespace Task2 {
     }
 
     bool MyClass::implement(const MyInterface &myInterface) {
-        if(canImplement(myInterface)){
+        if (canImplement(myInterface)) {
             implementsVector.emplace_back(myInterface);
             return true;
         }
@@ -37,7 +38,7 @@ namespace Task2 {
     }
 
     bool MyClass::deleteImplement(int id) {
-        if(id >= implementsVector.size() || id <0){
+        if (id >= implementsVector.size() || id < 0) {
             return false;
         }
         implementsVector.erase(implementsVector.begin() + id);
@@ -45,12 +46,16 @@ namespace Task2 {
     }
 
     MyClass::MyClass(const string &name, const vector<string> &funcVector, const vector<string> &fieldVector)
-            : MyClassForPoly(name, funcVector), fieldVector(fieldVector) {}
+            : MyClassForPoly(name, funcVector), fieldVector(fieldVector) {
+        this->name = "class " + name;
+    }
 
     MyClass::MyClass(const string &name, const vector<string> &funcVector, const vector<MyClass> &extendsVector,
                      const vector<MyInterface> &implementsVector, const vector<string> &fieldVector) : MyClassForPoly(
             name, funcVector), extendsVector(extendsVector), implementsVector(implementsVector), fieldVector(
-            fieldVector) {}
+            fieldVector) {
+        this->name = "class " + name;
+    }
 
     MyClass::~MyClass() {
         fieldVector.clear();
@@ -61,7 +66,7 @@ namespace Task2 {
         extendsVector.shrink_to_fit();
     }
 
-    bool MyClass::canExtend(const MyClass& myClass) {
+    bool MyClass::canExtend(const MyClass &myClass) {
         vector<string> thisFuncs(this->getFuncVector().begin(), this->getFuncVector().end());
         vector<string> extendFuncs(myClass.getFuncVector().begin(), myClass.getFuncVector().end());
         sort(thisFuncs.begin(), thisFuncs.end());
@@ -80,8 +85,8 @@ namespace Task2 {
 
     }
 
-    bool MyClass::extend(const MyClass& myClass) {
-        if(!canExtend(myClass)){
+    bool MyClass::extend(const MyClass &myClass) {
+        if (!canExtend(myClass)) {
             return false;
         }
         extendsVector.emplace_back(myClass);
@@ -89,7 +94,7 @@ namespace Task2 {
     }
 
     bool MyClass::deleteExtend(int id) {
-        if(id >= extendsVector.size() || id <0){
+        if (id >= extendsVector.size() || id < 0) {
             return false;
         }
         extendsVector.erase(extendsVector.begin() + id);
@@ -101,7 +106,7 @@ namespace Task2 {
     }
 
     bool MyClass::rmField(int id) {
-        if(id >= fieldVector.size() || id < 0){
+        if (id >= fieldVector.size() || id < 0) {
             return false;
         }
         fieldVector.erase(fieldVector.begin() + id);
@@ -109,12 +114,39 @@ namespace Task2 {
     }
 
 
-
     bool MyClass::changeField(string newName, int id) {
-        if(id >= fieldVector.size() || id < 0){
+        if (id >= fieldVector.size() || id < 0) {
             return false;
         }
         fieldVector[id] = std::move(newName);
         return true;
+    }
+
+    bool MyClass::getField(int id) {
+        false;
+    }
+
+    void MyClass::print() {
+
+        int i = 0;
+        cout << name << endl;
+        cout<< "   funcs: " << endl;
+        for (auto it = funcVector.begin(); it != funcVector.end(); ++it, ++i) {
+            cout << "      " << i << ": ";
+            cout << *it << endl;
+        }
+        i = 0;
+        cout<< "   fields: " << endl;
+        for (auto it = fieldVector.begin(); it != fieldVector.end(); ++it, ++i) {
+            cout << "      " << i << ": ";
+            cout << *it << endl;
+        }
+        i = 0;
+        cout<< "   implements: " << endl;
+        for (auto it = implementsVector.begin(); it != implementsVector.end(); ++it, ++i) {
+            cout << "      " << i << ": ";
+            cout << it->getName() << endl;
+        }
+
     }
 } // Task2

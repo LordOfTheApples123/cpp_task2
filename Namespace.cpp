@@ -6,6 +6,8 @@
 
 #include <utility>
 #include <algorithm>
+#include <iostream>
+
 using namespace Task2;
 using namespace std;
 
@@ -13,17 +15,17 @@ using namespace std;
 namespace Task2 {
 
 
-    MyClassForPoly Namespace::rmCLass(int id) {
-        MyClassForPoly res = classVector[id];
+    MyClassForPoly* Namespace::rmCLass(int id) {
+        MyClassForPoly* res = classVector[id];
         classVector.erase(classVector.begin() + id);
         return res;
     }
 
-    void Namespace::addClass(MyClassForPoly myClass) {
+    void Namespace::addClass(MyClassForPoly* myClass) {
         classVector.push_back(myClass);
     }
 
-    Namespace::Namespace(string name, const vector<MyClassForPoly> &classVector) : name(std::move(name)),
+    Namespace::Namespace(string name, const vector<MyClassForPoly*> &classVector) : name(std::move(name)),
                                                                                    classVector(classVector) {}
 
     Namespace::~Namespace() {
@@ -42,7 +44,7 @@ namespace Task2 {
         return rhs.name != this->name;
     }
 
-    MyClassForPoly Namespace::rmClass(MyClassForPoly myClass) {
+    MyClassForPoly* Namespace::rmClass(MyClassForPoly* myClass) {
         if(std::find(classVector.begin(), classVector.end(), myClass) != classVector.end()){
 
         }
@@ -50,6 +52,21 @@ namespace Task2 {
 
     Namespace::Namespace(string name) : name(std::move(name)) {
 
+    }
+
+    void Namespace::print() {
+        int i = 0;
+        cout<< name<< endl;
+        for(auto it = classVector.begin(); it!= classVector.end(); ++it, ++i){
+
+            cout<<"   " <<i << ": ";
+            auto curr = dynamic_cast<MyClassForPoly*>(*it);
+            curr->print();
+        }
+    }
+
+    MyClassForPoly* &Namespace::get(int id) {
+        return classVector[id];
     }
 
     Namespace &Namespace::operator=(const Namespace &rhs) = default;

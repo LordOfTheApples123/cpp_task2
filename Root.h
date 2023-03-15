@@ -9,12 +9,23 @@
 
 namespace Task2 {
 
+
     class Root {
-        void createNS(string name);
         bool deleteNS(int id);
-        Namespace& getNS(int id);
+
+        bool checkId(int id);
     private:
         vector<Namespace> nsVector;
+    public:
+        Root();
+
+        void print();
+
+        virtual ~Root();
+
+        void createNS(const string& name);
+
+        Namespace& getNS(int id);
     };
 
 } // Task2
